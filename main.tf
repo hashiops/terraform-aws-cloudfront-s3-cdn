@@ -32,6 +32,16 @@ data "aws_iam_policy_document" "origin" {
       identifiers = ["${aws_cloudfront_origin_access_identity.default.iam_arn}"]
     }
   }
+
+  statement {
+    actions   = ["s3:ListBucket"]
+    resources = ["arn:aws:s3:::$${bucket_name}"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${var.trusted_arn}"]
+    }
+  }
 }
 
 data "template_file" "default" {
