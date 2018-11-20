@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "origin" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${split(",", var.trusted_arn)}"]
+      identifiers = ["${var.trusted_arn}"]
     }
   }
 }
